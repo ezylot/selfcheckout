@@ -1,0 +1,24 @@
+<nav>
+  <ng-container *ngIf="isLoggedIn()">
+    <div class="menu-entry">
+      <a routerLink="/admin">Administration</a>
+    </div>
+    <div class="menu-entry">
+      <a routerLink="/">Products</a>
+    </div>
+    <div class="menu-entry">
+      <a (click)="logout()">Logout</a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isLoggedIn()">
+    <div class="menu-entry">
+      <a (click)="login()">Login</a>
+    </div>
+  </ng-container>
+</nav>
+<div class="main">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <app-shopping-basket></app-shopping-basket>
+</div>

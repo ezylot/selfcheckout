@@ -1,0 +1,16 @@
+{
+  "name": "selfcheckout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.6.0",
+    "selfcheckout-frontend": "file:selfcheckout-frontend",
+    "selfcheckout-server": "file:selfcheckout-server"
+  }
+}

@@ -1,0 +1,43 @@
+<loading-spinner *ngIf="this.showLoadingSpinner"></loading-spinner>
+
+<div class="new-product-button" (click)="newProduct()">
+  <span data-feather="plus-square"></span>
+  <span>Neues Produkt</span>
+</div>
+
+<div class="search">
+  <label>Suche</label>
+  <input type="text" [(ngModel)]="searchString" (input)="searchStringChanged$.next(undefined)" />
+</div>
+
+<div class="products">
+  <div class="product" *ngFor="let product of products$ | async" [class.editing]="editingProduct === product._id">
+
+    <div class="iconbutton-group">
+      <span (click)="delete(product._id)"><i data-feather="trash-2"></i></span>
+      <span *ngIf="editingProduct !== product._id" (click)="edit(product._id)"><i data-feather="edit"></i></span>
+      <span *ngIf="editingProduct === product._id" (click)="abortEdit(product._id)"><i data-feather="x-circle"></i></span>
+      <span *ngIf="editingProduct === product._id" (click)="finishEdit(product._id)"><i data-feather="save"></i></span>
+    </div>
+
+    <div class="product-property">
+      <label>Name</label>
+      <span *ngIf="editingProduct !== product._id">{{ product.name }}</span>
+      <input type="text" #productName *ngIf="editingProduct === product._id" [value]="product.name || ''" />
+    </div>
+    <div class="product-property">
+      <label>Kategorie</label>
+      <span *ngIf="editingProduct !== product._id">{{ product.category }}</span>
+      <input type="text" #productCategory *ngIf="editingProduct === product._id" [value]="product.category || ''" />
+    </div>
+    <div class="product-property">
+      <label>Preis</label>
+      <span *ngIf="editingProduct !== product._id">{{ product.price?.toFixed(2)  }}</span>
+      <input type="text" #productPrice *ngIf="editingProduct === product._id" [value]="product.price?.toFixed(2) ?? ''" />
+    </div>
+    <div class="image">
+      <img alt="placeholder" *ngIf="!product.productImageLink" src="assets/placeholder_400_400.png" />
+      <img alt="product image" *ngIf="product.productImageLink" [src]="product.productImageLink" />
+    </div>
+  </div>
+</div>
